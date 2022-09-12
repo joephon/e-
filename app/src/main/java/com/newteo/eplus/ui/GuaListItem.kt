@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class GuaListItem(
     var picId: Int = 0,
     val id: Int,
-    val title: String,
+    var title: String,
     val tip: String,
     val hint: String,
     val des: String,

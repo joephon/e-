@@ -19,25 +19,27 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        title = "六十四卦"
+
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.categories1)
         }
 
-        binding.navView.setCheckedItem(R.id.gua)
         binding.navView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.gua -> startActivity(Intent(this, MainActivity::class.java))
-                R.id.bu -> startActivity(Intent(this, BuActivity::class.java))
+                R.id.bu -> BuActivity.go(this, guaList)
             }
+
             binding.drawerLayout.closeDrawers()
             true
         }
 
         binding.fab.setOnClickListener {
-            "You just click fab button!".snake(it) {
-                "You press sure".toast()
+            "要去占卜吗？".snake(it) {
+                BuActivity.go(this, guaList)
             }
         }
 
@@ -45,11 +47,16 @@ class MainActivity : BaseActivity() {
 
         binding.guaRec.adapter = GuaRecyclerViewAdaptor(guaList)
         binding.guaRec.layoutManager = GridLayoutManager(this, 3)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.navView.setCheckedItem(R.id.gua)
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar, menu)
+        // menuInflater.inflate(R.menu.toolbar, menu)
         return true
     }
 

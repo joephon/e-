@@ -30,12 +30,12 @@ class GuaDetailsActivity : BaseActivity() {
         setContentView(binding.root)
 
         intent.getParcelableExtra<GuaListItem>("guaDetails")?.let {
-            Echo.d("guaa", it.toString())
             title = "${it.hint}"
             binding.guaPic.setImageResource(it.picId)
             binding.guaDes.text = "卦辞: \n${it.des}"
-            // binding.yaoList.text = "爻辞: \n${it.yaoList}"
             binding.details.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, it.yaoList + it.details)
+
+            guaDetails = it
         }
 
         setSupportActionBar(binding.toolbar)

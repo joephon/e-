@@ -1,5 +1,6 @@
 package com.newteo.eplus.ui
 
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.newteo.eplus.R
 import com.newteo.eplus.base.toast
 
-class GuaRecyclerViewAdaptor(private val list: List<GuaListItem>) : RecyclerView.Adapter<GuaRecyclerViewAdaptor.ViewHolder>() {
+class GuaRecyclerViewAdaptor(private val list: List<GuaListItem>, private val itemLayout: Int = R.layout.gua_list_item) : RecyclerView.Adapter<GuaRecyclerViewAdaptor.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val guaTitle: TextView = view.findViewById(R.id.guaTitle)
@@ -19,7 +20,7 @@ class GuaRecyclerViewAdaptor(private val list: List<GuaListItem>) : RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.gua_list_item, parent, false)
+            .inflate(itemLayout, parent, false)
 
         val viewHolder = ViewHolder(view)
         viewHolder.itemView.setOnClickListener {

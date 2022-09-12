@@ -1,9 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.BuActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Eplus.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.Eplus.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/whatFor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#444"
+            android:text="所求何事" />
+
+        <RadioGroup
+            android:id="@+id/checkGroup"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/once"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/healthy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/cause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/fate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/gua"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/guaRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
+
+            <LinearLayout
+                android:id="@+id/tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#444"
+                    android:layout_marginBottom="5dp"
+                    android:text="简要说明:" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/ben"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/hu"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5sp"
+                    android:text="@string/cuo"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/zong"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/bian"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/yao6Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao6YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao6Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao6YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/yao5Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao5YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao5Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao5YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/yao4Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao4YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao4Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao4YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/yao3Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao3YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao3Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao3YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/yao2Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao2YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao2Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao2YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/yao1Yang"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao1YangOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yang_old"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao1Yin"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/yao1YinOld"
+                android:layout_width="260dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/yin_old"
+                android:visibility="invisible"/>
+
+
+
+    </FrameLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/go"
+        android:paddingHorizontal="40dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

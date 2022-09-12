@@ -4,12 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/toolbar.xml" value="0.192" />
+        <entry key="app/src/main/res/drawable/yang_yao.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/yao.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/yin_yao.xml" value="0.1745" />
         <entry key="app/src/main/res/layout/activity_bu.xml" value="0.1644021739130435" />
         <entry key="app/src/main/res/layout/activity_gua_details.xml" value="0.33642261353104724" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1644021739130435" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/gua_list_item.xml" value="0.1884498480243161" />
+        <entry key="app/src/main/res/layout/gua_list_item_2.xml" value="0.1884498480243161" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.1644021739130435" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.33611111111111114" />
         <entry key="app/src/main/res/menu/toolbar.xml" value="0.33611111111111114" />
