@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:padding="10dp"
-    android:background="@color/background_dark">
+    android:background="@color/dark_primary">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"

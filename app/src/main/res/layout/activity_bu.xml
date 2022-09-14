@@ -70,12 +70,6 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/guaRec"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"/>
-
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -125,6 +119,12 @@
 
                 </LinearLayout>
             </ScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/guaRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/yao6Yang"
