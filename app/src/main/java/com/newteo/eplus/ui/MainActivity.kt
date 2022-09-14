@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeAsUpIndicator(R.drawable.categories1)
+            it.setHomeAsUpIndicator(R.drawable.ic_baseline_reorder_24)
         }
 
         binding.navView.setNavigationItemSelectedListener {

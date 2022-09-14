@@ -14,11 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="5dp"
-        android:paddingVertical="8dp">
+        android:paddingVertical="8dp"
+        android:background="@color/background_dark">
 
         <ImageView
             android:id="@+id/guaCover"
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="80dp"
             android:paddingHorizontal="3dp"
             android:scaleType="fitXY"
@@ -41,7 +42,7 @@
                 android:id="@+id/guaTip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/guaHint"

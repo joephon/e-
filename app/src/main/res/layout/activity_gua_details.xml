@@ -32,19 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginRight="20dp"
-                app:cardElevation="35dp">
 
-                <ImageView
-                    android:id="@+id/guaPic"
-                    android:layout_width="80dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitXY"/>
-            </com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/guaPic"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:id="@+id/guaDes"
@@ -56,30 +50,24 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+
+
+        <TextView
+            android:text="《爻辞》、《彖》、《象》、《文言》"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
+            android:textSize="16sp"
+            android:paddingVertical="10dp"
             android:layout_marginVertical="10dp"
-            android:background="#f1f1f1">
+            android:background="@color/background_dark"/>
 
-            <TextView
-                android:text="《爻辞》、《彖》、《象》、《文言》"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#555"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="5dp"
-            android:layout_marginBottom="16dp"
-            android:background="#f9f9f9">
+            android:layout_marginBottom="16dp">
 
             <ListView
                 android:id="@+id/details"
