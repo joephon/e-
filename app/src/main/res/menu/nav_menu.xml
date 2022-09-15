@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item android:id="@+id/gua"
-            android:title="六十四卦"
-            android:icon="@drawable/gua"/>
+            android:title="@string/nav_text_gua"
+            android:icon="@drawable/gua" />
 
         <item android:id="@+id/bu"
-            android:title="占卜"
+            android:title="@string/nav_text_bu"
             android:icon="@drawable/bu" />
     </group>
 </menu>

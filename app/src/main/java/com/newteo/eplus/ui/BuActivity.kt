@@ -17,8 +17,10 @@ import com.newteo.eplus.base.BaseActivity
 import com.newteo.eplus.base.Echo
 import com.newteo.eplus.base.toast
 import com.newteo.eplus.databinding.ActivityBuBinding
+import kotlinx.android.synthetic.main.activity_bu.*
 import kotlinx.android.synthetic.main.activity_bu.view.*
 import java.lang.Math.random
+import java.lang.StringBuilder
 import java.lang.Thread.sleep
 import kotlin.concurrent.thread
 import kotlin.math.floor
@@ -27,10 +29,15 @@ class BuActivity : BaseActivity() {
     private lateinit var binding: ActivityBuBinding
 
     private val whatIs = 1
+    private val showJieBtn = 2
+    private val showResetBtn = 3
     private var step = 0
     private var codes = ArrayList<List<Int>>()
     private var guaList: ArrayList<GuaListItem>? = null
     private var finalGuaList = ArrayList<GuaListItem>()
+    private var guaRecY: Float = 0f
+    private var benTitleY: Float = 0f
+    private var guaBackY: Float = 0f
 
     private val handler = object : Handler(Looper.getMainLooper()) {
         private var step = 0
@@ -38,6 +45,8 @@ class BuActivity : BaseActivity() {
             super.handleMessage(msg)
 
             when(msg.what) {
+                showResetBtn -> binding.reset.isVisible = true
+                showJieBtn -> binding.jie.isVisible = true
                 whatIs -> {
                     if (step < 6) step += 1 else step = 1
                     var yao = resources.getIdentifier("gua","id", packageName)
@@ -77,30 +86,49 @@ class BuActivity : BaseActivity() {
         }
 
         title = "周易天演"
-        binding.whatFor.text = "所求何事?"
-        binding.once.text = "遇事不明"
-        binding.healthy.text = "福寿"
-        binding.cause.text = "前程"
-        binding.fate.text = "机缘"
-        binding.go.text = "起卦"
-
         binding.go.setOnClickListener {
             "周易天演，走起～".toast()
             VibrationEffect.createOneShot(1800, 6)
 
-            it.go.text = "起卦..."
-            initAction()
+            // initAction()
             handleGua()
             Echo.d("codes", "$codes")
-            handleGuaResult()
 
             AnimatorSet().apply {
-                play(handleTip())
-                    .before(showFinalGuaList())
+                play(showFinalGuaList())
+                    .before(
+                        AnimatorSet().apply {
+                            play(moveGua())
+                                .with(showFinalGuaList2())
+                        }
+                    )
+                    .after(handleTip())
                 start()
             }
 
-            handleInform()
+            handleJieGua()
+        }
+
+        binding.jie.setOnClickListener {
+            "易家之言，切勿轻信".toast()
+            it.isVisible = false
+
+            getGuabackText()
+
+            AnimatorSet().apply {
+                play(jieAnimate(binding.gua))
+                    .with(jieAnimate2(binding.gua))
+                    .with(jieAnimate3(binding.gua))
+                    .with(jieAnimate4(binding.gua))
+                    .with(jieAnimate5(binding.guaBack))
+                start()
+            }
+
+            handleReset()
+        }
+
+        binding.reset.setOnClickListener {
+            initAction()
         }
 
     }
@@ -114,7 +142,6 @@ class BuActivity : BaseActivity() {
 
     private fun initAction() {
         step = 0
-        binding.tip.alpha = (1).toFloat()
         for (i in 1..6) {
             findViewById<View>(
                 resources.getIdentifier("yao${i}Yang", "id", packageName)
@@ -136,14 +163,48 @@ class BuActivity : BaseActivity() {
         codes.clear()
         finalGuaList.clear()
         binding.guaRec.isVisible = false
+        binding.benTitle.isVisible = false
+        binding.reset.isVisible = false
+        binding.go.isVisible = true
+        binding.guaRec.y = guaRecY
+        binding.benTitle.y = benTitleY
+        binding.guaWrapper.y = 0f
+        binding.guaBack.y = guaBackY - 100f
+        binding.guaBackText.text = ""
+        binding.gua.apply {
+            scaleX = 1f
+            scaleY = 1f
+            translationY = 0f
+            rotationX = 0f
+        }
+        binding.tip.alpha = 1f
+    }
+
+    private fun getGuabackText() {
+        val preTextList = listOf("当前情况", "发展过程", "可能的转变", "大环境","最终结果","或许这才是当下", "也许这才是结果")
+        val str = StringBuilder()
+        for ((k, v) in finalGuaList.withIndex()) {
+            for ((kk, vv) in preTextList.withIndex()) {
+                if (k == kk) {
+                    str.append("${vv}:${v.des}\n")
+                }
+            }
+        }
+
+        binding.guaBackText.text = str
+        binding.guaBack.apply {
+            guaBackY = 0f
+            y = -(this.height * 4).toFloat()
+        }
     }
 
     private fun showFinalGuaList() : ObjectAnimator {
         val target = binding.guaRec
         target.adapter = BuRecyclerViewAdaptor(finalGuaList)
-        target.layoutManager = GridLayoutManager(this,2,RecyclerView.HORIZONTAL, false)
+        target.layoutManager = GridLayoutManager(this,3,RecyclerView.HORIZONTAL, false)
         target.isVisible = true
         target.x = (target.width * 2).toFloat()
+        guaRecY = target.y
 
         val from = -(target.width * 1.5).toFloat()
         val to = (target.left).toFloat()
@@ -154,17 +215,77 @@ class BuActivity : BaseActivity() {
             }
     }
 
-    private fun handleTip() : ObjectAnimator {
-        val target = binding.tip
+    private fun showFinalGuaList2() : ObjectAnimator {
+        val target = binding.guaRec
+        val from = target.y
+        val to = (binding.root.height / 3).toFloat()
         return ObjectAnimator
-            .ofFloat(target, "alpha", (1).toFloat(), (0).toFloat()).apply {
-                duration = 800
+            .ofFloat(target, "y", from, to).apply {
+                duration = 1000
                 interpolator = AccelerateInterpolator()
             }
     }
 
-    private fun handleInform() {
+    private fun jieAnimate(target: View) : ObjectAnimator {
+        return ObjectAnimator
+            .ofFloat(target, "rotationX", 0f, 45f).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+            }
+    }
 
+    private fun jieAnimate2(target: View) : ObjectAnimator {
+        return ObjectAnimator
+            .ofFloat(target, "scaleX", 1f, 0.5f).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+            }
+    }
+
+    private fun jieAnimate3(target: View) : ObjectAnimator {
+        return ObjectAnimator
+            .ofFloat(target, "scaleY", 1f, 0.5f).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+            }
+    }
+
+    private fun jieAnimate4(target: View) : ObjectAnimator {
+        return ObjectAnimator
+            .ofFloat(target, "translationY", 0f, 400f).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+            }
+    }
+
+    private fun jieAnimate5(target: View) : ObjectAnimator {
+        target.isVisible = true
+        return ObjectAnimator
+            .ofFloat(target, "y", target.y, guaBackY).apply {
+                duration = 500
+                interpolator = AccelerateInterpolator()
+            }
+    }
+
+    private fun moveGua() : ObjectAnimator {
+        val target = binding.guaWrapper
+        val from = target.y
+        val to = -(target.height / 2).toFloat()
+        benTitleY = target.y
+        return ObjectAnimator
+            .ofFloat(target, "y", from, to).apply {
+                duration = 1000
+                interpolator = AccelerateInterpolator()
+            }
+    }
+
+    private fun handleTip() : ObjectAnimator {
+        val target = binding.tip
+        return ObjectAnimator
+            .ofFloat(target, "alpha", target.alpha, (0).toFloat()).apply {
+                duration = 800
+                interpolator = AccelerateInterpolator()
+            }
     }
 
     private fun handleGuaResult() {
@@ -216,6 +337,26 @@ class BuActivity : BaseActivity() {
                     "老卦: ${laoGua?.title}, \n" +
                     "老变卦: ${laoBianGua?.title}"
         )
+    }
+
+    private fun handleJieGua() {
+        binding.go.isVisible = false
+
+        thread {
+            sleep(2800)
+            handler.sendMessage(Message().apply {
+                what = showJieBtn
+            })
+        }
+    }
+
+    private fun handleReset() {
+        thread {
+            sleep(5000)
+            handler.sendMessage(Message().apply {
+                what = showResetBtn
+            })
+        }
     }
 
     private fun getBianGua() : GuaListItem {
@@ -308,6 +449,13 @@ class BuActivity : BaseActivity() {
 
             codes.add(result)
         }
+
+        handleGuaResult()
+
+        val benTitle = binding.benTitle
+        benTitle.isVisible = true
+        benTitle.text = matchGua(finalGuaList[0].yaoCodeList).title
+        animate(benTitle, true)
     }
 
     private fun calculate(): List<Int> {
@@ -329,12 +477,14 @@ class BuActivity : BaseActivity() {
         return final
     }
 
-    private fun animate(which: View) {
+    private fun animate(which: View, isTitle: Boolean = false) {
+        var step = step
+        if (isTitle) step = 8
         val wrapper: View = binding.gua
         val item: View = binding.yao1Yang
-        val to = (wrapper.height - wrapper.height * 0.15 - step * item.height * 1.5).toFloat()
+        val to = (wrapper.height - wrapper.height * 0.14 - step * item.height * 1.4).toFloat()
         val from = wrapper.top.toFloat() - 600
-        Echo.d("ooxx", "from is: $from, to is: $to")
+
         ObjectAnimator
             .ofFloat(which, "y", from, to).apply {
                 duration = (300 * step).toLong()

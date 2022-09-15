@@ -5,7 +5,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="3dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
 
@@ -14,14 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="5dp"
-        android:paddingVertical="8dp"
+        android:paddingVertical="5dp"
         android:background="@color/background_dark">
 
         <ImageView
             android:id="@+id/guaCover"
             android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:paddingHorizontal="3dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="5dp"
             android:scaleType="fitXY"
             />
 
@@ -37,13 +38,15 @@
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/guaTip"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:textSize="11sp"/>

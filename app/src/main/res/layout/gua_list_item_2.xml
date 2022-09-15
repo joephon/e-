@@ -5,7 +5,7 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="3dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
 
@@ -13,14 +13,16 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="5dp"
+        android:paddingHorizontal="10dp"
         android:paddingVertical="8dp"
         android:background="@color/background_dark">
 
         <ImageView
             android:id="@+id/guaCover"
             android:layout_width="60dp"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginEnd="5dp"
             android:paddingHorizontal="3dp"
             android:scaleType="fitXY"
             />
@@ -36,13 +38,13 @@
                 android:id="@+id/guaTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/guaTip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/guaHint"
@@ -54,6 +56,8 @@
                 android:id="@+id/guaDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:singleLine="true"
                 android:textSize="12sp" />
         </LinearLayout>
 

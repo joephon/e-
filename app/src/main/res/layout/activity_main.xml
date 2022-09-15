@@ -22,7 +22,7 @@
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -48,6 +48,8 @@
         android:id="@+id/navView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_dark"
+        app:itemTextColor="@color/white"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu"
         android:layout_gravity="start">
